@@ -5,12 +5,12 @@ import supervision as sv
 
 def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Safety Helmet Detection")
-    parser.add_argument("--webcam-resolution", default=[1920, 1080], nargs=2, type=int)
+    parser.add_argument("--webcam-resolution", default=[1080, 720], nargs=2, type=int)
     args = parser.parse_args()
     return args
 
 def main():
-    args = parse_arguments()
+    args = parse_arguments()    
     frame_width, frame_height = args.webcam_resolution
     
     cap = cv2.VideoCapture(0)
@@ -28,10 +28,10 @@ def main():
 
     while True:
         ret, frame = cap.read()
-        results = model(frame, conf = 0.58)[0]
+        frame = cv2.flip(frame, 1)
+        results = model(frame, conf = 0.55, agnostic_nms=True)[0]
         detections = sv.Detections.from_ultralytics(results)
         labels = [f"{class_name} {confidence:.2f}" for class_name, confidence in zip(detections['class_name'], detections.confidence)]
-
         frame = box_annotator.annotate(scene=frame, detections=detections, )
         frame = label_annotator.annotate(scene=frame, detections=detections, labels=labels)
         frame = cv2.putText(frame, text=('Workers Without Helmet!' if 'No Helmet' in detections['class_name'] else ''), org=(50, 50), fontScale=1, fontFace=cv2.FONT_HERSHEY_SIMPLEX, color=(0, 0, 255), thickness=3)
