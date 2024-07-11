@@ -69,29 +69,122 @@ The above steps can be performed to make predictions on the test dataset or on a
 
 Many benchmark results and confusion matrices are automatically created by the YOLOv8 model on completion of training and validation. These results can be found in the `runs` folder. We will look and analyze these benchmarks in the following section :
 
-1. **Confusion Matrix :** The normalised confusion matrices for the models trained on different epochs are shown below: (shown for validation of models)
-<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
-
-<div style="margin: 10px;">
-    <img src="runs/detect/val/30_Epochs/confusion_matrix_normalized.png" alt="Confusion Matrix for 30 Epochs" width="500" title="Confusion Matrix for 30 Epochs">
+1. **Confusion Matrix :** The normalised confusion matrices for the models trained on different epochs are shown below: (shown for validation). It provides a detailed breakdown of the predictions made by the model and compares them to the actual outcomes. It becomes clear from the following plots that with the increase in epochs, the model is able to accurately identify workers without safety helmet, and the number of true positives increases and false positives decrease. Also, it becomes clear from the plot that the 'worker' classification was not accurate as most of the time the model identified it as background.(This happened due to the fact the 'Worker' class was underrepresented in the dataset).
+<center>
+    <img src="runs/detect/val/30_Epochs/confusion_matrix_normalized.png" alt="Condusion Matrix for 30 Epochs" width="640" title="Condusion Matrix for 30 Epochs">
     <h3>Confusion Matrix for 30 Epochs</h3>
-</div>
+</center>
 
-<div style="margin: 10px;">
-    <img src="runs/detect/val/50_Epochs/confusion_matrix_normalized.png" alt="Confusion Matrix for 50 Epochs" width="500" title="Confusion Matrix for 50 Epochs">
+<center>
+    <img src="runs/detect/val/50_Epochs/confusion_matrix_normalized.png" alt="Condusion Matrix for 50 Epochs" width="640" title="Condusion Matrix for 50 Epochs">
     <h3>Confusion Matrix for 50 Epochs</h3>
-</div>
+</center>
 
-<div style="margin: 10px;">
-    <img src="runs/detect/val/100_Epochs/confusion_matrix_normalized.png" alt="Confusion Matrix for 100 Epochs" width="500" title="Confusion Matrix for 100 Epochs">
+<center>
+    <img src="runs/detect/val/100_Epochs/confusion_matrix_normalized.png" alt="Condusion Matrix for 100 Epochs" width="640" title="Condusion Matrix for 100 Epochs">
     <h3>Confusion Matrix for 100 Epochs</h3>
-</div>
-
-</div>
+</center>
 
 
+2. **Precision Curve :** The Precision Curve for the models trained on different epochs are shown below:(shown for validation). This is a graphical representation of precision values at different thresholds. This curve helps in understanding how precision varies as the threshold changes. It shows the accuracy of the detected objects, indicating how many detections were correct. 
 
 
+<center>
+    <img src="runs\detect\val\30_Epochs\P_curve.png" alt="Precision Curvre for 30 Epochs" width="640" title="Precision Curvre for 30 Epochs">
+    <h3>Precision Curvre for 30 Epochs</h3>
+</center>
+
+<center>
+    <img src="runs\detect\val\50_Epochs\P_curve.png" alt="Precision Curvre for 50 Epochs" width="640" title="Precision Curvre for 50 Epochs">
+    <h3>Precision Curvre for 50 Epochs</h3>
+</center>
+
+<center>
+    <img src="runs\detect\val\100_Epochs\P_curve.png" alt="Precision Curvre for 100 Epochs" width="640" title="Precision Curvre for 100 Epochs">
+    <h3>Precision Curvre for 100 Epochs</h3>
+</center>
+
+
+3. **Recall Curve :** The Recall Curve for the models trained on different epochs are shown below:(shown for validation). This graph illustrates how the recall values change across different thresholds. It describes the ability of the model to identify all instances of objects in the images. From the curves, its visible that with the increase in the number of epochs, the recall of the model improves significantly, for a purticular confidence threshold.
+
+
+<center>
+    <img src="runs\detect\val\30_Epochs\R_curve.png" alt="Recall Curvre for 30 Epochs" width="640" title="Recall Curvre for 30 Epochs">
+    <h3>Recall Curvre for 30 Epochs</h3>
+</center>
+
+<center>
+    <img src="runs\detect\val\50_Epochs\R_curve.png" alt="Recall Curvre for 50 Epochs" width="640" title="Recall Curvre for 50 Epochs">
+    <h3>Recall Curvre for 50 Epochs</h3>
+</center>
+
+<center>
+    <img src="runs\detect\val\100_Epochs\R_curve.png" alt="Recall Curvre for 100 Epochs" width="640" title="Recall Curvre for 100 Epochs">
+    <h3>Recall Curvre for 100 Epochs</h3>
+</center>
+
+
+4. **P-R Curve :** The P-R Curve for the models trained on different epochs are shown below:(shown for validation). It is an integral visualization for any classification problem, as this curve showcases the trade-offs between precision and recall at varied thresholds. It becomes especially significant when dealing with imbalanced classes. It can be seen that for the increase in the number of epochs, the area under the P-R curve increases, thus pointing to the improved Precision and Recall of the model.
+
+
+<center>
+    <img src="runs\detect\val\30_Epochs\PR_curve.png" alt="P-R Curvre for 30 Epochs" width="640" title="P-R Curvre for 30 Epochs">
+    <h3>P-R Curvre for 30 Epochs</h3>
+</center>
+
+<center>
+    <img src="runs\detect\val\50_Epochs\PR_curve.png" alt="P-R Curvre for 50 Epochs" width="640" title="P-R Curvre for 50 Epochs">
+    <h3>P-R Curvre for 50 Epochs</h3>
+</center>
+
+<center>
+    <img src="runs\detect\val\100_Epochs\PR_curve.png" alt="P-R Curvre for 100 Epochs" width="640" title="P-R Curvre for 100 Epochs">
+    <h3>P-R Curvre for 100 Epochs</h3>
+</center>
+
+
+5. **F1 Curve :** The F1 Curve for the models trained on different epochs are shown below:(shown for validation). Interpreting this curve can offer insights into the model's balance between false positives and false negatives over different thresholds. As the epoch increases, so does the F1 value, most significantly for the 'No Helmet' class.
+
+<center>
+    <img src="runs\detect\val\30_Epochs\F1_curve.png" alt="F1 Curvre for 30 Epochs" width="640" title="F1 Curvre for 30 Epochs">
+    <h3>F1 Curvre for 30 Epochs</h3>
+</center>
+
+<center>
+    <img src="runs\detect\val\50_Epochs\F1_curve.png" alt="F1 Curvre for 50 Epochs" width="640" title="F1 Curvre for 50 Epochs">
+    <h3>F1 Curvre for 50 Epochs</h3>
+</center>
+
+<center>
+    <img src="runs\detect\val\100_Epochs\F1_curve.png" alt="F1 Curvre for 100 Epochs" width="640" title="F1 Curvre for 100 Epochs">
+    <h3>F1 Curvre for 100 Epochs</h3>
+</center>
+
+To know more about the benchmark results and how they compare against each other, visit my [website](https://archismansengupta.site/safetyhelmetdetection). 
 
 
 ## AREAS OF APPLICATIONS:🔨
+The development of a real-time safety helmet detection system using the YOLOv8 deep learning model has several significant applications across various industries. Here are some key areas and related real-world use cases:
+1. **Construction Sites**
+- Hazard Detection: Ensuring that all workers are wearing safety helmets to prevent head injuries from falling objects, machinery, or debris.
+- Compliance Monitoring: Automating the monitoring of safety compliance to adhere to occupational safety regulations and reduce the risk of penalties.
+- Incident Analysis: Recording and analyzing video footage to review compliance and investigate incidents.
+2. **Manufacturing and Industrial Plants**
+- Machine Safety: Ensuring workers near heavy machinery are protected with helmets, reducing the risk of injuries from mechanical failures or accidents.
+- Safety Audits: Automating safety audits to continuously monitor helmet usage without the need for manual checks.
+- Emergency Response: Quickly identifying workers not wearing helmets during emergency situations to prioritize rescue efforts.
+3. **Mining Operations**
+- Underground Safety: Monitoring helmet usage in underground mines where the risk of head injuries is high due to low ceilings and heavy equipment.
+- Remote Monitoring: Using real-time video feeds to monitor remote and hazardous areas where direct supervision is challenging.
+
+The real-time safety helmet detection system not only enhances worker safety but also contributes to operational efficiency, regulatory compliance, and overall risk management in various industrial and construction settings.
+
+## FUTURE WORK:
+
+- Will train other Image Processing models(like CNN models using Tensorflow, PyTorch, etc) and compare their accuracies.
+
+- A face recognition model can be incorporated with the safety helmet detection system to identify workers who are not wearing helmets by matching their identities through a database.
+
+## REFERENCES:
+
+- [**Ultralytics Docs**](https://docs.ultralytics.com/) - Home page of the Ultralytics library.
